@@ -899,7 +899,7 @@ input {
     #nav-main {
         width: 90%;
         justify-self: center;
-   align-self: center;
+        align-self: center;
     }
 
     .nav-bar-ul {
@@ -945,8 +945,6 @@ input {
         align-items: center;
     }
     
-
-    }
     #subscribe {
         width: 95%;
     }
