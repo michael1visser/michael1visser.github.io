@@ -944,6 +944,14 @@ input {
         justify-content: center;
         align-items: center;
     }
+
+    .footer-list {
+        width: 95%;
+    }
+
+    .footer-list h3 {
+        padding: 0;
+    }
     
     #subscribe {
         width: 95%;
@@ -959,8 +967,18 @@ input {
         margin-bottom: 4%;
     }
 
+    #services h3 {
+        padding: 0;
+    }
+
     #services li {
         display: inline;
+        margin-right: 5%;
+    }
+
+    #support li {
+        display: inline;
+        margin-right: 5%;
     }
 
     #follow-me {
