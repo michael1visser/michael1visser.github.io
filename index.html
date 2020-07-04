@@ -1,291 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:300,400,700|Montserrat:300,400,700" rel="stylesheet">
-    <title>Mark Antony</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <title>Batman's Rogues Gallery</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-<header>
-    <nav id="navbar">
-            <h4 id="nav-name">Mark Antony</h4>
+    <header>
+        <h1>Rogues Gallery</h1>
 
-                <ul class="nav-bar-ul">
-                    <li class="nav-bar-li">Home</li>
-                    <li class="nav-bar-li">Services</li>
-                    <li class="nav-bar-li">My Story</li>
-                    <li class="nav-bar-li">My Skills</li>
-                    <li class="nav-bar-li">Portfolio</li>
-                    <li class="nav-bar-li">Review</li>
-                </ul>
-
-            <div id="contact-me-button">Contact Me</div>
-        </nav>
-
-        <div id="nav-main">
-            <h3>Hello I am</h3>
-            <h1>Mark Antony</h1>
-            <h3>UX Designer and Developer</h3>
-            <div class="button" id="get-started">
-                Get Started
-            </div>
+    </header>
+    <main>
+        <div id="character-grid">
+            
         </div>
-    
-</header>
-
-<main>
-    <section>
-        <div id="service-grid">
-            <div id="my-services">
-                <h2>My Services</h2>
-                <p>I am a Highly experienced web designer and developer. I also provide photography and videography service. I have done lots of design projects for big organizations as well as various smaller startups, I love to help those people who want a creative and modern looking website design.<br/>
-                I've made 200 videos  and 600 different types photography
-                </p>
-                <div class="button" id="service-hire"><a href="#">Hire Me</a></div>
-            </div>
-
-            <div class="service" id="web-design">
-                <div class="service-icon">
-                    <img  src="img/web-design-icon.svg" alt="">
+        <div id="modal">
+            <div id="close-button">X</div>
+            <div id="modal-content">
+                <div class="modal-img"></div>
+                <div class="modal-header">
+                    <h2 id="char-name"></h2>
+                    <h2 id="real-name"></h2>
+                    <h4 id="first-app"></h4>
                 </div>
-                <div class="service-content">
-                    <h5>Web design</h5>
-                    <p>All of my designs are modern and completely unique. I am up to date with the latest web design trends.</p>
-                </div>
-            </div>
-
-            <div class="service" id="photography">
-                <div class="service-icon">
-                    <img  src="img/photography-icon.svg" alt="">
-                </div>
-                <div class="service-content">
-                    <h5>Photography</h5>
-                    <p>Professional photography for events, birthday parties, or any other small private celebration.</p>
-                </div>
-            </div>
-            <div class="service" id="videography">
-                <div class="service-icon">
-                    <img  src="img/videography-icon.svg" alt="">
-                </div>
-                <div class="service-content">
-                    <h5>Videography</h5>
-                    <p>Standard video projects are usually between 5 to 30 minutes in length, although can sometimes be longer. </p>
-                </div>
-            </div>
-            <div class="service" id="web-development">
-                <div class="service-icon">
-                    <img  src="img/web-dev-icon.svg" alt="">
-                </div>
-                <div class="service-content">
-                    <h5>Web Development</h5>
-                    <p>Website development service gives you a simple, quick and secure way of getting your dream website.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="video-section">
-        <div id="video-bg">
-            <a href="#" id="video-link"> <img id="video-button" 
-            src="img/video_button.svg" alt="play video"></a>
-
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="head-p-list" id="skill-container">
-            <h2>My Skills</h2>
-            <p class="head-p-list-content">I am using various digital tool for my services. Most are adobe product. Check out my skill level from below graphs.</p>
-            <div id="skill-list">
-                <div class="skill">
-                    <img class="skill-image" src="img/xd.png" alt="Adobe XD">
-                    <p class="skill-name">Adobe XD</p>
-                </div>
-                <div class="skill">
-                    <img class="skill-image" src="img/illustrator.png" alt="Adobe XD">
-                    <p class="skill-name">Adobe Illustrator</p>
-                </div>
-                <div class="skill">
-                    <img class="skill-image" src="img/photoshop.png" alt="Adobe XD">
-                    <p class="skill-name">Adobe Photoshop</p>
-                </div>
-                <div class="skill">
-                    <img class="skill-image" src="img/indesign.png" alt="Adobe XD">
-                    <p class="skill-name">Adobe Indesign</p>
-                </div>
-                <div class="skill">
-                    <img class="skill-image" src="img/after_effects.png" alt="Adobe XD">
-                    <p class="skill-name">Adobe After Effects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="diagonal-break-grey"></div>
-    
-    <section class="flex-section" id="portfolio">
-        <div class="head-p-list" id="portfolio-container">
-            <h2>My Portfolio</h2>
-            <p class="head-p-list-content">The portfolio is conveying quality and experience of my services. See my portfolio to understand how qualified and experienced I am.</p>
-            <ul class="nav-ul" id="portfolio-ul">
-                <li class="portfolio-li"><a class="active" href="#">Web Design</a></li>
-                <li class="portfolio-li"><a href="#">App Design</a></li>
-                <li class="portfolio-li"><a href="#">Photography</a></li>
-                <li class="portfolio-li"><a href="#">Videography</a></li>
-                <li class="portfolio-li"><a href="">Web Development</a></li>
-            </ul>
-        </div>
-        <div id="web-des-photos">
-            <div id="web-des-photo1">
-                <img src="img/tea.png" alt="Tea">
-            </div>
-            <div id="web-des-photo2" alt="Black Watch">
-                <img src="img/watch-black.png">
-            </div>
-            <div id="web-des-photo3" alt="Daiquiri">
-                <img src="img/daiquiri.png">
-            </div>
-            <div id="web-des-photo4" alt="White Watch">
-                <img src="img/watch-white.png">
-            </div>
-            <div id="web-des-photo5" alt="Plant">
-                <img src="img/plant.png">
-            </div>
-            <div id="web-des-photo6" alt="Cappuccino">
-                <img src="img/capp.png">
-            </div>
-        </div>
-    </section>
-    <div id="diagonal-break-white"></div>
-    <section class="flex-section" id="clients-say">
-    <div class="head-p-list" id="clients-container">
-        <h2>What My Clients Say</h2>
-        <p class="head-p-list-content">Check out what clients say about my services. Happy clients all over the world. Share your experience with me by submitting your reviews</p>
-        <div id="client-list">
-            <div class="client-card">
-                <div class="client-card-content">
-                    What a Service!!!! Antony is one of the top Classy designer in the world. Exceeded expectation and designed my website to my requirements. Will be using for ongoing work.
-                </div>
-                <div class="client-card-image">
-                    <img src="img/Beckham.png" alt="David Beckham">
-                </div>
-                <div class="client-card-name">
-                    <h5>David Beckham</h5>
-                    Managing Director
-                </div>
-            </div>
-            <div class="client-card">
-                <div class="client-card-content">
-                    Mark Antony is amazing designer to work with. Excellent design skills and very patient with me. Made several changes with no problem and made new ideas when asked.
-                </div>
-                <div class="client-card-image">
-                    <img src="img/Luiz.png" alt="David Beckham">
-                </div>
-                <div class="client-card-name">
-                    <h5>David Luiz</h5>
-                    CEO & Founder
-                </div>
-            </div>
-            <div class="client-card">
-                <div class="client-card-content">
-                    Mark has delivered what was promised and was absolutely amazing to work with. I can't rate this guy high enough, his work is fantastic and I will defiantly use him again .
-                </div>
-                <div class="client-card-image">
-                    <img src="img/Karen.png" alt="David Beckham">
-                </div>
-                <div class="client-card-name">
-                    <h5>Donna Karan</h5>
-                    Fashion Designer
-                </div>
-            </div>
-        </div>
-        <div id="dotted-line">
-            <img src="img/dotted_line.png" alt="Dotted Line">
-        </div> 
-    </section>
-</main>
-
-<footer>
-    <section id="work-with-me">
-        <h2>I am Available for new projects. Want to work with me?</h2>
-        <div class="button" id="footer-hire-button"><a href="#">Hire Me</a></div>
-    </section>
-    <section id="info-footer">
-        <div id="site-map">
-            <div id="subscribe">
-                <h4>Mark Antony</h4>
-                Subscribe Newsletter
-                <div id="email-input">
-                    <input id="email" placeholder="Email address">
-                    <div id="email-button">
-                        <img src="img/question-box-icon.svg" alt="Question Mark">
+                <div class="modal-lists">
+                    <div class="list">
+                        <h4>Fighting Ability</h4>
+                        <ul id="stats"></ul>
+                    </div>
+                    <div class="list">
+                        <h4>Also Known As</h4>
+                        <ul id="aka"></ul>
                     </div>
                 </div>
-
-            </div>
-            <div class="footer-list" id="services">
-                <h3>Services</h3>
-                <ul>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">App Design</a></li>
-                    <li><a href="#">Photography</a></li>
-                    <li><a href="#">Videography</a></li>
-                    <li><a href="#">Web Development</a></li>
-                </ul>
-            </div>
-            <div class="footer-list" id="support">
-                <h3>Support</h3>
-                <ul>
-                    <li><a href="#">Get Support</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">My Blog</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Pricing</a></li>
-                </ul>
-            </div>
-            <div class="footer-list" id="follow-me">
-                <h3>Follow Me</h3>
-                <ul>
-                    <li><a href="#"><img src="img/question-box-icon.svg" alt="Question Mark"></a></li>
-                    <li><a href="#"><img src="img/question-box-icon.svg" alt="Question Mark"></a></li>
-                    <li><a href="#"><img src="img/question-box-icon.svg" alt="Question Mark"></a></li>
-                    <li><a href="#"><img src="img/question-box-icon.svg" alt="Question Mark"></a></li>
-                    <li><a href="#"><img src="img/question-box-icon.svg" alt="Question Mark"></a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="phone-email-address">
-            <div class="pea-grid">
-                <div class="pea-icon">
-                    <img src="img/phone-icon.svg" alt="phone-icon">
-                </div>
-                <div class="pea-content">
-                    Phone <br/>
-                    Manager - (555) 652- 3567
-                </div>
-            </div>
-            <div class="pea-grid">
-                <div class="pea-icon">
-                    <img src="img/email-icon.svg" alt="email-icon">
-                </div>
-                <div class="pea-content">
-                    EMail <br/>
-                    Info@modonkumer.com
-                </div>
-            </div>
-            <div class="pea-grid">
-                <div class="pea-icon">
-                    <img src="img/map-icon.svg" alt="map-icon">
-                </div>
-                <div class="pea-content">
-                    My Address <br/>
-                    2837  Kincheloe Road, Portland, United States 
+                <div class="modal-footer">
+                    <h4 id="deets"></h4>
                 </div>
             </div>
         </div>
-    </section>
-</footer>
+    </main>
 </body>
+<script src="script.js"></script>
 </html>
