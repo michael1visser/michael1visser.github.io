@@ -1,208 +1,272 @@
-let body = document.querySelector("body")
+let startButton = document.querySelector("#start-button")
+let startGameModal = document.querySelector("#start-game-modal")
+let winnerModal = document.querySelector("#winner-modal")
+let loserModal = document.querySelector("#loser-modal")
+let wordForm = document.querySelector("#word-form")
+let wordBlank = document.querySelector("#word-blank")
+let timeBlank = document.querySelector("#time-blank")
+let chanceBlank = document.querySelector("#chance-blank")
+let boardGrid = document.querySelector("#board-grid")
+let guessForm = document.querySelector("#guess-form")
+let guessBlank = document.querySelector("#guess-blank")
+let guessButton = document.querySelector("#guess-button")
+let incorrectGuessList = document.querySelector("#incorrect-guess-list")
+let chancesRemaining = document.querySelector("#chances-remaining")
+let timeRemaining = document.querySelector("#time-remaining")
+let footer = document.querySelector("footer")
+let pompeii = document.querySelector("#pompeii")
 
-let characters = document.querySelectorAll(".character-card")
 
-let characterIds = [370, 216, 522, 461, 386, 576, 60, 165, 457, 538, 546, 427, 514, 558, 309, 214, 181, 678]
+let word = []
+let chances = 0
+let time = null
+let currentGuess = ""
+let correctGuesses = []
+let incorrectGuesses = []
+let letterBlanks = ""
 
-let baseURL = 'https://www.superheroapi.com/api.php/10108022590356420/'
+let smoke = document.querySelector("#smoke") 
+let lava = document.querySelector("#lava")
+let smokeWidth = 1
+let lavaWidth = 30
+let smokeInterval = 0
+let lavaInterval = 0
 
-let cards
+// START THE GAME
+function startGame() {
 
-let grid = document.querySelector("#character-grid")
+    wordForm.style.display = "flex"
 
-let modalImg = document.querySelector(".modal-img")
-
-let charName = document.querySelector("#char-name")
-
-let realName = document.querySelector("#real-name")
-
-let firstApp = document.querySelector("#first-app")
-
-let akaList = document.querySelector("#aka")
-
-let statsList = document.querySelector("#stats")
-
-/* let id = 370
-console.log(`${baseURL}${id}`) */
-
-//let cards = document.querySelectorAll(".character-card")
-
-//FUNCTION TO SET CARD BACKGROUNDS AND CHARACTER NAMES
-
-function setCard(baseURL, ids){
-
-    characterIds.forEach((n) => {
-
-        fetch(`${baseURL}${n}/image`)
-            .then(res => res.json())
-            .then(res =>{
-                //console.log(res.url)
-                let card = document.createElement("div")
-                let name = document.createElement("h3")
-                name.classList.add("char-card-name")
-                card.classList.add("character-card")
-                card.dataset.id = n
-                name.innerText = res.name
-                let image = res.url
-                //console.log(image)
-                card.style.backgroundImage = `url(${image})`
-                //card.appendChild(name)
-                card.appendChild(name)
-                grid.appendChild(card)
-                card.addEventListener("click", popModal)
-            })
-            .then(res => {
-                cards = document.querySelectorAll(".character-card")
-                console.log(cards)
-            })
-            .catch(err =>{
-                console.log(`oops!: ${err}`)
-            })
-    }) 
-   
+    startGameModal.style.display = "none"
 }
 
-setCard(baseURL, characterIds)
-
-document.addEventListener("mouseover", (e) =>{
-    if(e.target.className == "character-card" || (e.target.className == "char-card-name")){
-        e.target.style.color = "#ffffff"
-        e.target.firstElementChild.style.color = "#ffffff"
+startGameModal.addEventListener("click", e => {
+    if (e.target.classList == "button"){
+        startGame(e)
+        wordBlank.focus()
     }
 })
 
-document.addEventListener("mouseout", (e) =>{
-    if(e.target.className == "character-card"){
-        //e.target.classList.add("highlighted")
-        e.target.firstElementChild.style.color = "#000000"
-    }
-})
-
-function modalDeets(e, charId, image){
-    fetch(`${baseURL}${charId}/biography`)
-        .then(res => res.json())
-        .then(res => {
-        
-            let aliases = res.aliases
-            //console.log(aliases)
-
-            //console.log(e.target.style.backgroundImage)
-            modalImg.style.backgroundImage = image
-            charName.innerHTML = res.name
-            realName.innerHTML = `Real Name: ${res["full-name"]}`
-            firstApp.innerHTML = `First Appearance: ${res["first-appearance"]}`
-
-            aliases.forEach(n => {
-                let item = document.createElement("li")
-                item.innerHTML = n
-                akaList.appendChild(item)
-            })
-        })
-
-        fetch(`${baseURL}${charId}/powerstats`)
-        .then(res => res.json())
-        .then(res => {
-            //console.log(res)
-
-            
-            let stats = [`Combat: ${res.combat}`,`Intelligence ${res.intelligence}`,`Power: ${res.power}`,`Speed: ${res.speed}`,`Strength ${res.strength}`]
-
-            //let statsList = document.querySelector("#stats")
-
-            stats.forEach(n =>{
-                let item = document.createElement("li")
-                item.innerHTML = n
-                statsList.appendChild(item)
-            })
-        })
-
-        fetch(`${baseURL}${charId}/appearance`)
-        .then(res => res.json())
-        .then(res => {
-            //console.log(res)
-            let height = res.height
-            let weight = res.weight
-            let eye = res["eye-color"]
-            let hair = res["hair-color"]
-
-            let deets = document.querySelector("#deets")
-            
-            deets.innerHTML = `Height: ${height}  |  Weight: ${weight}  |  Hair Color: ${hair}  |  Eye Color: ${eye}`
-        })
-        .then(res => {
-            document.addEventListener("click", hideModal)
-
-            cards.forEach(n =>{
-                n.removeEventListener("click", popModal)
-                
-            })
-        })
-        .then(res => {
-            modal.style.display = "block"
-        })
-        .then((res) =>{
-            
-            window.setTimeout( () =>{
-            modal.style.opacity = "1"
-        }, 100)
-
-        })
-
-        
-}
 
 
-function popModal(e) {
+//CAPTURE ENTERED WORD AS ARRAY
+function setWord(e) {
     e.preventDefault()
+    
+    wordString = wordBlank.value
 
-    document.removeEventListener("click", hideModal)
-
-    let modal = document.querySelector("#modal")
-
-   //console.log(e)
-   if (e.target.className == "character-card" ){
-    
-    let charId = e.target.dataset.id 
-    
-    let image = e.target.style.backgroundImage
-    
-    modalDeets(e, charId, image)
-   }
-   else if (e.target.parentElement.className == "character-card"){
-
-    let charId = e.target.parentElement.dataset.id
-    
-    let image = e.target.parentElement.style.backgroundImage
-    
-    modalDeets(e, charId, image)
+    if (wordString.length == 0){
+        alert("Please enter a word to begin")
     }
+    else{
+    word = wordBlank.value.toLowerCase().split("")
+
+    if (chanceBlank.value.length == 0){
+        chances = null
+    }
+    else {
+    chances = chanceBlank.value
+    chancesRemaining.innerText = chances
+    }
+
+    if (timeBlank.value.length != 0){
+        time = timeBlank.value
+        timeRemaining.innerText = `${time}s`
+    }
+    
+
+    
+    lavaInterval = 60/chances
+    smokeInterval = 80/chances
+
+    createBoard()
+    }
+}
+wordForm.addEventListener("submit", setWord)
+
+//CREATE GAME BOARD FROM WORD
+
+function createBoard(){
+
+    wordForm.style.display = "none"
+
+    word.forEach((n,i) => {
+
+        let blank = document.createElement("div")
+        blank.classList.add("letter-blank")
+        blank.dataset.position = i
+        
+        if (word.length > 9){
+            blank.style.height = "50%"
+            blank.style.fontSize = "45px"
+        }
+        
+        boardGrid.appendChild(blank)
+    })
+    letterBlanks = document.querySelectorAll(".letter-blank")
+
+    board.style.display = "flex"
+    guessForm.addEventListener("submit", submitGuess)
+
+    if (time != null){
+    let timer = setInterval(countDown, 1000)
+    }
+
+    guessBlank.focus()
 }
 
 
-function hideModal(e){
+//COUNTDOWN TIMER
+function countDown(){
+    if (time <= 0 || correctGuesses.length == word.length){
+        clearInterval(timer)
+    }
+    else{
+    time--
+    }
+    timeRemaining.innerText = `${time}s`
+}
+
+
+
+//ON-SCREEN KEYBOARD PICKUP
+function typeKey(e){
+    if (e.target.classList.contains("letter")){
+    guessBlank.value = e.target.dataset.key
+    //console.log(guessBlank.value)
+    }
+}
+board.addEventListener("click", typeKey)
+
+
+//SUBMIT GUESS
+function submitGuess(e){
+    //e.preventDefault()
+    let alreadyGuessed = 0
+
+    correctGuesses.forEach(n =>{
+        if (guessBlank.value == n){
+            alreadyGuessed++
+        }
+    })
+
+    incorrectGuesses.forEach(n =>{
+        if (guessBlank.value == n){
+            alreadyGuessed++
+        }
+    })
+
+    if (alreadyGuessed > 0){
+        e.preventDefault()
+        alert("You've already guessed that letter, please choose another.")
+    }
+    else {
     e.preventDefault()
-
-    if(e.target.closest("#character-grid") || e.target == document.querySelector("#close-button")){
-        console.log("Removed")
-        
-            modal.style.opacity = "0"    
-
-        window.setTimeout( () =>{
-            modal.style.display = "none"
-            akaList.innerHTML = ""
-            statsList.innerHTML = ""
-        }, 600)
-
-        
-
-        document.removeEventListener("click", hideModal)
-        
-        
-        cards.forEach(n =>{
-            n.addEventListener("click", popModal)
-        })
+    currentGuess = guessBlank.value.toLowerCase()
+    //console.log(currentGuess)
+    checkGuess(currentGuess)
+    guessBlank.value = ""
+    guessBlank.focus()
     }
 }
 
 
+//GUESS LOGIC
 
+function checkGuess(guess){
+    let correct = 0
+
+    word.forEach((n,i) => {
+        console.log("checking")
+        if (currentGuess == n ){
+            letterBlanks[i].innerText = n
+            correct++
+        }
+        })
+    
+    if (correct > 0){
+        for (let i=0; i<correct; i++){
+            correctGuesses.push(guess)
+        }
+           // console.log(`Correct: ${correctGuesses}`)
+    }
+    else {
+        incorrectGuesses.push(guess)
+        //console.log(`Incorrect: ${incorrectGuesses}`)
+        logIncorrect(guess)
+
+        lavaWidth = lavaWidth + lavaInterval
+        smokeWidth = smokeWidth + smokeInterval
+        lava.style.width = `${lavaWidth}%`
+        smoke.style.width = `${smokeWidth}%`
+        //console.log(lavaWidth)
+        if (chances != null){
+        chances--
+        chancesRemaining.innerText = chances
+        }
+
+    }
+    
+    
+
+    checkForWinner()
+}
+
+//ADD INCORRECT GUESSES TO THE DISPLAY
+function logIncorrect(guess){
+    let add = document.createElement("li")
+    add.innerText = guess
+    incorrectGuessList.appendChild(add)
+
+}
+
+//CHECK FOR WINNER
+function checkForWinner(){
+
+    if(correctGuesses.length == word.length){
+        winnerModal.style.display = "flex"
+        guessForm.removeEventListener("submit", submitGuess)
+    }
+    else if ((correctGuesses.length < word.length && chances == 0) || (correctGuesses.length < word.length && time == 0)){
+        let message = document.querySelector("#loss-message")
+        message.innerText = wordString
+        loserModal.style.display = "flex"
+        guessForm.removeEventListener("submit", submitGuess)
+        pompeii.style.backgroundImage = "url(/images/pompeii-after.png)"
+    }
+    document.addEventListener("click", (e,) => {
+        if (e.target.classList.contains("play-again")){
+            let winnerLoser = e.target.parentElement
+            resetGame(winnerLoser)
+        }
+    })
+}
+
+//RESET GAME
+function resetGame(winnerLoser) {
+    
+    let activeModal = winnerLoser
+
+    word = []
+    chances = 0
+    time = null
+    currentGuess = ""
+    correctGuesses = []
+    incorrectGuesses = []
+    
+    wordBlank.value = ""
+    chanceBlank.value = ""
+    timeBlank.value = ""
+    incorrectGuessList.innerText = ""
+    chancesRemaining.innerText = ""
+    boardGrid.innerHTML = ""
+    
+    lavaWidth = 30
+    lava.style.width = `${lavaWidth}%`
+    smokeWidth = 0
+    smoke.style.width = `${smokeWidth}%`
+    pompeii.style.backgroundImage = "url(/images/pompeii-before.png)"
+    board.style.display = "none"
+    activeModal.style.display = "none"
+    startGame()
+}

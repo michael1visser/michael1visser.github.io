@@ -1,37 +1,33 @@
- # :supervillain_man: Batman's Rogues Gallery :supervillain_woman:
+ # :volcano: Save Pompeii! :cityscape:
  
 
 ## Introduction 
 
-Batman's Rogues Gallery is a UI Modal interface featuring some of the most famous (and some not so famous) villains of Gotham City.
+Save Pompeii operates the same as the classic game Hangman except in this version you are trying to save the city of Pompeii from the Mt. Vesuvius erruption. 
+
+The volcano is errupting and it's up to you to save Pompeii! Guess letters to complete the chosen word but beware, the more incorrect guesses a player has, the closer the lava gets to the city. :pleading_face:
 
 ## Prerequisites
 
-The gallery is best viewed in the Google Chrome browser.
+* Save Pompeii is not mobile optimized and operates best on Google's Chrome desktop browser.
 
 ## Installation
 
-To install the gallery, download all repo files to your computer. Be sure to save them in the same directory (aka folder).
+To install Save Pompeii, download all repository files to your computer. Be sure to save them in the same directory (aka folder).
 
-Open index.html in Chrome.
+Open index.html in Chrome and play!
 
-## How it Works
+## Playing a Game
 
-To interact with the gallery, hover over the card featuring the villain about whom you would like more information and click the card. A modal with more detail about the villain will display. 
+To begin, click the Start Game button. 
 
-To close the modal, click the "X" at the top right of the modal or simply click anywhere inside the computer terminal.
+At the first screen, one player enters a word, a maximum number of guesses (optional), and a time limit (optional). 
+
+On the following screen, another player uses their keyboard or the UI keyboard to guess letters until they guess the word, their chances are exhausted, or time runs out. 
 
 ## Acknowledgements
 
-* Many thanks to Roger and Noah for teaching me Javascript, HTML, and CSS.
-* Character info and images sourced from: https://superheroapi.com/
-* Computer terminal background image sourced from: https://www.desktopbackground.org
-* Batcave image sourced from: https://vignette.wikia.nocookie.net
-* Readme template help from: 
-    https://dev.to/scottydocs/how-to-write-a-kickass-readme-5af9
-* Emoji markdown shortcodes found at:
-    https://github.com/ikatyang/emoji-cheat-sheet
-
+* Thank you to Caitlin Visser for providing the Volcano and Pompeii drawings.
 
 ### Contact me
 https://github.com/michael1visser
