@@ -43,6 +43,7 @@ function startGame() {
 startGameModal.addEventListener("click", e => {
     if (e.target.classList == "button"){
         startGame(e)
+
         wordBlank.focus()
     }
 })
@@ -73,8 +74,6 @@ function setWord(e) {
         time = timeBlank.value
         timeRemaining.innerText = `${time}s`
     }
-    
-
     
     lavaInterval = 60/chances
     smokeInterval = 80/chances
@@ -110,22 +109,23 @@ function createBoard(){
 
     if (time != null){
     let timer = setInterval(countDown, 1000)
+   
+        //COUNTDOWN TIMER
+        function countDown(){
+        if (time <= 0 || correctGuesses.length == word.length || chances == 0){
+            clearInterval(timer)
+            console.log(timer)
+        }
+        else{
+        time--
+        }
+        timeRemaining.innerText = `${time}s`
+        }
     }
 
     guessBlank.focus()
 }
 
-
-//COUNTDOWN TIMER
-function countDown(){
-    if (time <= 0 || correctGuesses.length == word.length){
-        clearInterval(timer)
-    }
-    else{
-    time--
-    }
-    timeRemaining.innerText = `${time}s`
-}
 
 
 
@@ -133,7 +133,6 @@ function countDown(){
 function typeKey(e){
     if (e.target.classList.contains("letter")){
     guessBlank.value = e.target.dataset.key
-    //console.log(guessBlank.value)
     }
 }
 board.addEventListener("click", typeKey)
@@ -141,7 +140,8 @@ board.addEventListener("click", typeKey)
 
 //SUBMIT GUESS
 function submitGuess(e){
-    //e.preventDefault()
+    e.preventDefault()
+    
     let alreadyGuessed = 0
 
     correctGuesses.forEach(n =>{
@@ -157,21 +157,19 @@ function submitGuess(e){
     })
 
     if (alreadyGuessed > 0){
-        e.preventDefault()
+        
         alert("You've already guessed that letter, please choose another.")
     }
     else {
-    e.preventDefault()
-    currentGuess = guessBlank.value.toLowerCase()
-    //console.log(currentGuess)
-    checkGuess(currentGuess)
-    guessBlank.value = ""
-    guessBlank.focus()
+        currentGuess = guessBlank.value.toLowerCase()
+        checkGuess(currentGuess)
+        guessBlank.value = ""
+        guessBlank.focus()
     }
 }
 
 
-//GUESS LOGIC
+//CHECK GUESS AGAINST WORD ARRAY
 
 function checkGuess(guess){
     let correct = 0
@@ -182,33 +180,28 @@ function checkGuess(guess){
             letterBlanks[i].innerText = n
             correct++
         }
-        })
+    })
     
     if (correct > 0){
-        for (let i=0; i<correct; i++){
+        for (let j=0; j<correct; j++){
             correctGuesses.push(guess)
         }
-           // console.log(`Correct: ${correctGuesses}`)
     }
     else {
         incorrectGuesses.push(guess)
-        //console.log(`Incorrect: ${incorrectGuesses}`)
         logIncorrect(guess)
 
         lavaWidth = lavaWidth + lavaInterval
         smokeWidth = smokeWidth + smokeInterval
         lava.style.width = `${lavaWidth}%`
         smoke.style.width = `${smokeWidth}%`
-        //console.log(lavaWidth)
+
         if (chances != null){
         chances--
         chancesRemaining.innerText = chances
         }
 
     }
-    
-    
-
     checkForWinner()
 }
 
@@ -230,10 +223,13 @@ function checkForWinner(){
     else if ((correctGuesses.length < word.length && chances == 0) || (correctGuesses.length < word.length && time == 0)){
         let message = document.querySelector("#loss-message")
         message.innerText = wordString
+
         loserModal.style.display = "flex"
         guessForm.removeEventListener("submit", submitGuess)
+
         pompeii.style.backgroundImage = "url(/images/pompeii-after.png)"
     }
+
     document.addEventListener("click", (e,) => {
         if (e.target.classList.contains("play-again")){
             let winnerLoser = e.target.parentElement
@@ -259,6 +255,7 @@ function resetGame(winnerLoser) {
     timeBlank.value = ""
     incorrectGuessList.innerText = ""
     chancesRemaining.innerText = ""
+    timeRemaining.innerText = ""
     boardGrid.innerHTML = ""
     
     lavaWidth = 30
